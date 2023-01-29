@@ -10,11 +10,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Medicacion {
-  id            Int      @id @default(autoincrement())
-#  paciente      Paciente    @relation(fields: [pacienteId], references: [id])
-#  pacienteId    Int
+  id             Int       @id @default(autoincrement())
+  pacientes      Pacientes @relation(fields: [pacienteId], references: [id])
+  pacienteId     Int
 #  pastillas     Pastillas   @relation(fields: [pastillaId], references: [id])
 #  pastillaId    Int
   fechaInicio    DateTime 
 }
+
+model Pacientes {
+  id Int @id @default(autoincrement())
+  nombre String
+  dni String @db.VarChar(8) @unique
+  edad Int 
+  correo String @unique
+  celular String @unique
+  @@map("pacientes")
+}
+
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  correo String @unique
+  password String
+
+  @@map("doctores")
+}
+
+model recordatory{
+  id Int @id @default(autoincrement())
+  paciente_id String
+  medicacion_id String
+  metodo_notificacion String
+  Hora String
+}
+
