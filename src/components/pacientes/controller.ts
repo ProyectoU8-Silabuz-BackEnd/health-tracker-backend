@@ -39,7 +39,7 @@ export const findpaciente = async (req:Request, res: Response): Promise<void> =>
 }
 
 
-export const adduser= async(req:Request, res: Response): Promise<void> =>{
+export const addpaciente= async(req:Request, res: Response): Promise<void> =>{
     try {
         const {nombre, dni, edad, correo, celular} = req.body;
 
