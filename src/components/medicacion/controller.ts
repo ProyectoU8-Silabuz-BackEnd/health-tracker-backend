@@ -48,7 +48,7 @@ export const medicacionFindOne = async (req:Request, res: Response): Promise<voi
 export const medicacionAdd = async (req: Request, res: Response): Promise<void> => {
     try {
 
-    	const {pacienteId, pastillaId, fechaInicio} = req.params;
+    	const {pacienteId, pastillaId, fechaInicio} = req.body;
 
         const medicacion = await prisma.medicacion.create({
         	data: {
