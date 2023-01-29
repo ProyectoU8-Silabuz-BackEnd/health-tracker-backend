@@ -9,3 +9,17 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Medicacion {
+  id            Int      @id @default(autoincrement())
+#  paciente      Paciente    @relation(fields: [pacienteId], references: [id])
+#  pacienteId    Int
+#  pastillas     Pastillas   @relation(fields: [pastillaId], references: [id])
+#  pastillaId    Int
+  fechaInicio    DateTime 
+}
+
+model pastillasOnMedicacion {
+  pastillas Pastillas @relation(fields: [postId], references: [id])
+  pastillasId
+}
