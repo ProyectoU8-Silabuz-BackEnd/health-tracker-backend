@@ -53,5 +53,6 @@ model recordatory{
 model Pastillas{
   id Int @id @default(autoincrement())
   id_enfermedad String
+  nombre String
   dosis Int
 }
