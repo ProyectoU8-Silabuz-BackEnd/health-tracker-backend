@@ -29,3 +29,11 @@ model User {
 
   @@map("doctores")
 }
+
+model recordatory{
+  id Int @id @default(autoincrement())
+  paciente_id String
+  medicacion_id String
+  metodo_notificacion String
+  Hora String
+}
