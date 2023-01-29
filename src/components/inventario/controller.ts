@@ -3,13 +3,13 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma= new PrismaClient();
 
-export const medicacionFindAll = async (_req: Request, res: Response): Promise<void> => {
+export const inventarioFindAll = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const medicaciones = await prisma.medicacion.findMany();
+        const inventario = await prisma.inventario.findMany();
 
         res.status(200).json({
             ok: true,
-            data: medicaciones,
+            data: inventario,
         });
 
     } catch (error) {
@@ -17,22 +17,21 @@ export const medicacionFindAll = async (_req: Request, res: Response): Promise<v
     }
 }
 
-export const medicacionFindOne = async (req:Request, res: Response): Promise<void> => {
+export const inventarioFindOne = async (req:Request, res: Response): Promise<void> => {
 
     try {
 
-    	const {pacienteId, pastillaId} = req.params;
+    	const {pastillaId} = req.params;
 
-        const medicacion = await prisma.medicacion.findUnique({
+        const pastillaStock = await prisma.inventario.findUnique({
         	where:{
-		        pacienteId: Number(pacienteId),
 		        pastillaId: Number(pastillaId),
 		    },
 		});
 
         res.status(200).json({
             ok: true,
-            data: medicacion,
+            data: pastillaStock,
 		})
 
     } catch (error) {
@@ -45,23 +44,22 @@ export const medicacionFindOne = async (req:Request, res: Response): Promise<voi
     }
 }
 
-export const medicacionAdd = async (req: Request, res: Response): Promise<void> => {
+export const pastillaAdd = async (req: Request, res: Response): Promise<void> => {
     try {
 
-    	const {pacienteId, pastillaId, fechaInicio} = req.body;
+    	const {pastillaId, cantidad} = req.body;
 
-        const medicacion = await prisma.medicacion.create({
+        const pastillaStock = await prisma.inventario.create({
         	data: {
-		        pacienteId: Number(pacienteId),
 		        pastillaId: Number(pastillaId),
-		        fechaInicio: fechaInicio,
+		        cantidad: cantidad,
 		    },
 		});
 
         res.status(201).json({
             ok: true,
-            data: medicacion,
-            message: "medicacion añadida correctamente",
+            data: pastillaStock,
+            message: "pastilla y su cantidad añadidas correctamente",
 		})
 
     } catch (error) {
