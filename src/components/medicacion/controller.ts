@@ -20,7 +20,7 @@ export const medicacionFindAll = async (_req: Request, res: Response): Promise<v
 export const medicacionFindOne = async (req:Request, res: Response): Promise<void> => {
 
     try {
-    	
+
     	const {pacienteId, pastillaId} = req.params;
 
         const medicacion = await prisma.medicacion.findUnique({
@@ -33,6 +33,34 @@ export const medicacionFindOne = async (req:Request, res: Response): Promise<voi
         res.status(200).json({
             ok: true,
             data: medicacion,
+		})
+
+    } catch (error) {
+
+        res.status(500).json({
+            ok:false,
+            message: error,
+        })
+        
+    }
+}
+
+export const medicacionAdd = async (req: Request, res: Response): Promise<void> => {
+    try {
+
+    	const {pacienteId, pastillaId} = req.params;
+
+        const medicacion = await prisma.medicacion.create({
+        	data: {
+		        pacienteId: Number(pacienteId),
+		        pastillaId: Number(pastillaId),
+		    },
+		});
+
+        res.status(201).json({
+            ok: true,
+            data: medicacion,
+            message: "medicacion añadida correctamente",
 		})
 
     } catch (error) {
