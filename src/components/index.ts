@@ -1,0 +1,1 @@
+export {default as pacienterouter} from "./pacientes"
