@@ -18,3 +18,10 @@ model Medicacion {
 #  pastillaId    Int
   fechaInicio    DateTime 
 }
+
+model Inventario {
+  id            Int         @id @default(autoincrement())
+#  pastillas     Pastillas   @relation(fields: [pastillaId], references: [id])
+#  pastillaId    Int         @unique
+  cantidad      Int
+}
