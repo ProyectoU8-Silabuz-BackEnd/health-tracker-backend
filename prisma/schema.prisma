@@ -18,8 +18,3 @@ model Medicacion {
 #  pastillaId    Int
   fechaInicio    DateTime 
 }
-
-model pastillasOnMedicacion {
-  pastillas Pastillas @relation(fields: [postId], references: [id])
-  pastillasId
-}
