@@ -9,3 +9,14 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Pacientes {
+  id Int @id @default(autoincrement())
+  nombre String
+  dni String @db.VarChar(8) @unique
+  edad Int 
+  correo String @unique
+  celular String @unique
+
+}
