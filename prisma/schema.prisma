@@ -64,3 +64,9 @@ model Pastillas{
   nombre String
   dosis Int
 }
+
+model enfermedad{
+  id Int @id @default(autoincrement())
+  name String
+  gravedad Int
+}
