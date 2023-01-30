@@ -63,8 +63,7 @@ model Pastillas{
   id_enfermedad String
   nombre String
   dosis Int
-  }
-
+}
 
 
 model enfermedad{
