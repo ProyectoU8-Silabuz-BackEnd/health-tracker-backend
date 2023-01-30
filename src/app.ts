@@ -3,6 +3,7 @@ import { recordatoryRouter } from "./components";
 import { medicacionRouter } from "./components";
 import { inventarioRouter } from "./components";
 import { enfermedadRouter } from "./components";
+
 const app: Application = express();
 //hello world
 app.get("/",(req,res)=>{
