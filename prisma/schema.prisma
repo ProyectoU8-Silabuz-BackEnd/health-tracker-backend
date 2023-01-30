@@ -56,3 +56,9 @@ model recordatory{
   Hora String
 }
 
+model enfermedad{
+  id Int @id @default(autoincrement())
+  name String
+  gravedad Int
+}
+
