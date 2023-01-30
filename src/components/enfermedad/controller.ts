@@ -55,7 +55,7 @@ export const enfermedadAdd = async (req: Request, res: Response): Promise<void> 
         const enfermedad = await prisma.enfermedad.create({
             data:{
                 name:name,
-                gravedad:gravedad
+                gravedad:Number(gravedad)
             }
         });
     
