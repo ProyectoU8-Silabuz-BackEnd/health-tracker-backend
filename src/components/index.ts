@@ -5,3 +5,4 @@ export {default as userrouter} from "./users"
 export {default as recordatoryRouter } from "./recordatory";
 export {default as pastillarouter} from "./pastillas";
 
+export { default as loginrouter} from "./login";
