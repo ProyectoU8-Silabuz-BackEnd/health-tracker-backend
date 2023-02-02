@@ -30,6 +30,17 @@ model Pacients {
   @@map("pacientes")
 }
 
+model Doctor {
+  id        Int    @id @default(autoincrement())
+  name      String
+  last_name String
+  dni       String @unique @db.VarChar(8)
+  celular   String
+  user_id   Int
+  users     User   @relation(fields: [user_id], references: [id])
+
+  @@map("doctor")
+}
 
 model User {
   id Int @id @default(autoincrement())
