@@ -1,20 +1,19 @@
 import express, { type Application } from "express";
-import { recordatoryRouter } from "./components";
-import { medicacionRouter } from "./components";
-import { inventarioRouter } from "./components";
+import { loginrouter, recordatoryRouter,
+        medicacionRouter,inventarioRouter,
+        enfermedadRouter } from "./components";
+import { twiliorouter } from "./services";
+
+
 
 const app: Application = express();
-//hello world
-app.get("/",(req,res)=>{
-    res.json(
-        {
-            "Title": "Hola mundito"
-        }
-    );
-})
+app.use(express.json());
+
 
 app.use("/api/v1/recordatory", recordatoryRouter);
 app.use("/api/v1/medicacion", medicacionRouter);
 app.use("/api/v1/inventario", inventarioRouter);
-
+app.use("/api/v1/enfermedad", enfermedadRouter);
+app.use("/api/v1/user/login", loginrouter);
+app.use("/api/v1/twilio",twiliorouter)
 export default app;
