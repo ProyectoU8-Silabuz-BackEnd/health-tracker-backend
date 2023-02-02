@@ -63,6 +63,7 @@ model Recordatory{
   Fecha_inicio DateTime
   Fecha_fin DateTime
   interval String
+  message String
   medicamento_id Int
   medicamento Pastillas @relation(fields: [medicamento_id],references: [id])
   @@map("recordatorio")
