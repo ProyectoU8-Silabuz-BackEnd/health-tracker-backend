@@ -19,13 +19,14 @@ model Inventario {
   cantidad      Int
 }
 
-model Pacientes {
-  id Int @id @default(autoincrement())
-  nombre String
-  dni String @db.VarChar(8) @unique
-  edad Int 
-  correo String @unique
+model Pacients {
+  id      Int    @id @default(autoincrement())
+  nombre  String
+  dni     String @unique @db.VarChar(8)
+  edad    Int
   celular String @unique
+  pacient_id Int 
+  users User @relation(fields: [pacient_id],references: [id])
   @@map("pacientes")
 }
 
