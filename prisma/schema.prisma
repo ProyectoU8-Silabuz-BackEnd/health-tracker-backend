@@ -12,11 +12,13 @@ datasource db {
 
 
 
-model Inventario {
+model Inventory {
   id            Int         @id @default(autoincrement())
-#  pastillas     Pastillas   @relation(fields: [pastillaId], references: [id])
-#  pastillaId    Int         @unique
+  pastillas     Pastillas   @relation(fields: [pastillaId], references: [id])
+  pastillaId    Int         
   cantidad      Int
+
+  @@map("inventario")
 }
 
 model Pacients {
@@ -55,12 +57,15 @@ model User {
   @@map("users")
 }
 
-model recordatory{
+model Recordatory{
   id Int @id @default(autoincrement())
   paciente_id String
-  medicacion_id String
-  metodo_notificacion String
-  Hora String
+  Fecha_inicio DateTime
+  Fecha_fin DateTime
+  interval String
+  medicamento_id Int
+  medicamento Pastillas @relation(fields: [medicamento_id],references: [id])
+  @@map("recordatorio")
 }
 
 
@@ -70,6 +75,9 @@ model Pastillas{
   id_enfermedad String
   nombre String
   dosis Int
+  recordatory Recordatory[]
+  inventory Inventory[]
+  @@map("pastillas")
 }
 
 model enfermedad{
