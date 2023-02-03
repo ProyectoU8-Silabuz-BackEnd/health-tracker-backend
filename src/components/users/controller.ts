@@ -24,13 +24,14 @@ export const findAllUsers = async (_req: Request, res: Response): Promise<void> 
 export const findiduser = async (req:Request, res: Response): Promise<void> => {
 
     try { const {id} = req.params;
-        const userid = await prisma.user.findUnique({where: {
-        id: Number(id),
-                },});
-        console.log(userid);
+        const userid = await prisma.user.findUnique({
+            where: {
+                id: Number(id),
+                },
+        });
         res.status(200).json({
             ok:true,
-            data:userid ,
+            data:userid,
         })
 
     } catch (error) {
@@ -45,7 +46,12 @@ export const findiduser = async (req:Request, res: Response): Promise<void> => {
 
 export const adduser= async(req:Request, res: Response): Promise<void> =>{
     try {
-        const {name, correo, password} = req.body;
+        const {correo, password,rol} = req.body;
+        var role:string;
+        if(!rol){
+             role="admin";
+        }
+        
         hash(password,10,async (error:any,hashP:string)=>
         {
             if(error){
@@ -59,14 +65,13 @@ export const adduser= async(req:Request, res: Response): Promise<void> =>{
             else{
                 await prisma.user.create({
                     data:{
-                        name: name,
                         correo: correo,
                         password: hashP,
-                        
+                        rol:role        
                     }
                 });
                 res.status(201).json({
-                    ok:true, message: "Usuario creado correctamente"
+                    ok:true, message: "Admin creado correctamente"
                 });
 
             }
