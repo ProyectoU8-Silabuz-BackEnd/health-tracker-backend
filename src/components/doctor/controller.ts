@@ -50,10 +50,28 @@ export const getDoctor = async (req:Request, res: Response): Promise<void> => {
 
 export const createDoctor= async(req:Request, res: Response): Promise<void> =>{
     try {
-        const data = req.body;
+        const {name,last_name,dni,celular,users} = req.body;
 
+        console.log(name,last_name,dni,celular,users);
         const doctor=await prisma.doctor.create({
-            data,
+            data:{
+                name:name,
+                last_name:last_name,
+                dni:dni,
+                celular:celular,
+                users: {
+                    connectOrCreate:{
+                        where:{
+                            correo:users.correo
+                        },
+                        create:{
+                            correo:users.correo,
+                            password:users.password,
+                            rol:"doctor"
+                        },
+                    },
+                },
+            },
             include:{
                 users:true
             }
