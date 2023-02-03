@@ -1,19 +1,19 @@
 import type { Request, Response} from "express";
 import { PrismaClient } from "@prisma/client";
-import {User} from "./../../interfaces/userInterface"
+
 const prisma= new PrismaClient();
 
-export const allpacientes = async (_req: Request, res: Response): Promise<void> => {
+export const getAll = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const pacientes = await prisma.pacients.findMany({
-            include:{
-                users:true
-            }
+        const doctor = await prisma.doctor.findMany({
+            include: {
+                users: true,
+              },
         });
 
         res.status(200).json({
             ok: true,
-            data: pacientes,
+            data: doctor,
         });
     } catch (error) {
         res.status(500).json({ ok: false, message: error });
@@ -22,20 +22,20 @@ export const allpacientes = async (_req: Request, res: Response): Promise<void> 
 
 
 
-export const findpaciente = async (req:Request, res: Response): Promise<void> => {
+export const getDoctor = async (req:Request, res: Response): Promise<void> => {
 
     try { const {id} = req.params;
-        const pacienteid = await prisma.pacients.findUnique({
+        const doctor = await prisma.doctor.findUnique({
             where: {
                 id: Number(id),
                 },
             include:{
-                users:true
-            }
-            });
+                users:true,
+            },
+        });
         res.status(200).json({
             ok:true,
-            data:pacienteid ,
+            data: doctor ,
         })
 
     } catch (error) {
@@ -48,16 +48,16 @@ export const findpaciente = async (req:Request, res: Response): Promise<void> =>
 }
 
 
-export const addpaciente= async(req:Request, res: Response): Promise<void> =>{
+export const createDoctor= async(req:Request, res: Response): Promise<void> =>{
     try {
-        const {nombre,dni,edad,celular,users} = req.body;
-        var role;
-        console.log(users);
-        const pacient=await prisma.pacients.create({
+        const {name,last_name,dni,celular,users} = req.body;
+
+        console.log(name,last_name,dni,celular,users);
+        const doctor=await prisma.doctor.create({
             data:{
-                nombre:nombre,
+                name:name,
+                last_name:last_name,
                 dni:dni,
-                edad:edad,
                 celular:celular,
                 users: {
                     connectOrCreate:{
@@ -67,7 +67,7 @@ export const addpaciente= async(req:Request, res: Response): Promise<void> =>{
                         create:{
                             correo:users.correo,
                             password:users.password,
-                            rol:"pacient"
+                            rol:"doctor"
                         },
                     },
                 },
@@ -76,14 +76,13 @@ export const addpaciente= async(req:Request, res: Response): Promise<void> =>{
                 users:true
             }
         });
-                res.status(201).json({
-                    ok:true, 
-                    message: "Paciente añadido correctamente",
-                    pacient:pacient
-                });
+        res.status(201).json({
+            ok:true, 
+            message: "Doctor añadido correctamente",
+            doctor: doctor
+        });
 
-            }
-     catch (error) {
+        }catch (error) {
         res.status(500).json({
             ok:false,
             message:error

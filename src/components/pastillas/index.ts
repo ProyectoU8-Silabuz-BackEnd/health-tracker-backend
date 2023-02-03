@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {allpastillas, findpastillas, addpastilla} from "./controller";
 
-const pastillarouter = Router =Router();
+const pastillarouter =Router();
 
 pastillarouter.get("/", allpastillas);
 pastillarouter.get("/:id", findpastillas);

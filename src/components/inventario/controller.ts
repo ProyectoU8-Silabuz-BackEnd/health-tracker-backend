@@ -5,7 +5,7 @@ const prisma= new PrismaClient();
 
 export const inventarioFindAll = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const inventario = await prisma.inventario.findMany();
+        const inventario = await prisma.inventory.findMany();
 
         res.status(200).json({
             ok: true,
@@ -23,9 +23,9 @@ export const inventarioFindOne = async (req:Request, res: Response): Promise<voi
 
     	const {pastillaId} = req.params;
 
-        const pastillaStock = await prisma.inventario.findUnique({
+        const pastillaStock = await prisma.inventory.findUnique({
         	where:{
-		        pastillaId: Number(pastillaId),
+		        id: Number(pastillaId),
 		    },
 		});
 
@@ -49,7 +49,7 @@ export const pastillaAdd = async (req: Request, res: Response): Promise<void> =>
 
     	const {pastillaId, cantidad} = req.body;
 
-        const pastillaStock = await prisma.inventario.create({
+        const pastillaStock = await prisma.inventory.create({
         	data: {
 		        pastillaId: Number(pastillaId),
 		        cantidad: cantidad,

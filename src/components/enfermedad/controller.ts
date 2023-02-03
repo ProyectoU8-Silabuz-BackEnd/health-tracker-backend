@@ -5,7 +5,7 @@ const prisma= new PrismaClient();
 
 export const enfermedadFindAll = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const enfermedades = await prisma.inventario.findMany();
+        const enfermedades = await prisma.enfermedad.findMany();
 
         res.status(200).json({
             ok: true,
@@ -28,7 +28,7 @@ export const enfermedadfindOne = async (req:Request, res: Response): Promise<voi
 
         const enfermedad = await prisma.enfermedad.findUnique({
         	where:{
-		        enfermedad: Number(enfermedadId),
+		        id: Number(enfermedadId),
 		    },
 		});
 
