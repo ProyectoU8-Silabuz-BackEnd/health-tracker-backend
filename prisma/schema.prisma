@@ -27,7 +27,7 @@ model Pacients {
   dni     String @unique @db.VarChar(8)
   edad    Int
   celular String @unique
-  pacient_id Int 
+  pacient_id Int @unique
   users User @relation(fields: [pacient_id],references: [id])
   @@map("pacientes")
 }
@@ -38,7 +38,7 @@ model Doctor {
   last_name String
   dni       String @unique @db.VarChar(8)
   celular   String
-  user_id   Int
+  user_id   Int    @unique
   users     User   @relation(fields: [user_id], references: [id])
 
   @@map("doctor")
@@ -47,7 +47,6 @@ model Doctor {
 
 model User {
   id Int @id @default(autoincrement())
-  name String
   correo String @unique
   password String
   rol      String
