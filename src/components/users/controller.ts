@@ -46,11 +46,8 @@ export const findiduser = async (req:Request, res: Response): Promise<void> => {
 
 export const adduser= async(req:Request, res: Response): Promise<void> =>{
     try {
-        const {correo, password,rol} = req.body;
+        const {correo, password} = req.body;
         var role:string;
-        if(!rol){
-             role="admin";
-        }
         
         hash(password,10,async (error:any,hashP:string)=>
         {
@@ -67,7 +64,7 @@ export const adduser= async(req:Request, res: Response): Promise<void> =>{
                     data:{
                         correo: correo,
                         password: hashP,
-                        rol:role        
+                        rol:"admin"        
                     }
                 });
                 res.status(201).json({
