@@ -5,7 +5,7 @@ const prisma= new PrismaClient();
 
 export const allpacientes = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const pacientes = await prisma.paciente.findMany();
+        const pacientes = await prisma.pacients.findMany();
 
         res.status(200).json({
             ok: true,
@@ -21,7 +21,7 @@ export const allpacientes = async (_req: Request, res: Response): Promise<void> 
 export const findpaciente = async (req:Request, res: Response): Promise<void> => {
 
     try { const {id} = req.params;
-        const pacienteid = await prisma.paciente.findUnique({where: {
+        const pacienteid = await prisma.pacients.findUnique({where: {
         id: Number(id),
                 },});
         res.status(200).json({
@@ -41,18 +41,14 @@ export const findpaciente = async (req:Request, res: Response): Promise<void> =>
 
 export const addpaciente= async(req:Request, res: Response): Promise<void> =>{
     try {
-        const {nombre, dni, edad, correo, celular} = req.body;
+        const data = req.body;
 
-        await prisma.user.create({
-                    data:{
-                        nombre: nombre,
-                        dni: dni,
-                        edad: edad,
-                        correo: correo,
-                        celular: celular, 
-                        
-                    }
-                });
+        await prisma.pacients.create({
+            data,
+            include:{
+                users:true
+            }
+        });
                 res.status(201).json({
                     ok:true, message: "Paciente añadido correctamente"
                 });
