@@ -1,10 +1,18 @@
 import { Router } from "express";
+import passport from "passport";
+import { checkRoles } from "../../middleware/handler/roleHandler";
 import { createDoctor, getAll, getDoctor } from "./controller";
 
-const inventarioRouter: Router = Router();
+const doctorrouter: Router = Router();
 
-inventarioRouter.get("/", getAll);
-inventarioRouter.get("/:id",getDoctor );
-inventarioRouter.post("/", createDoctor);
+doctorrouter.get("/",
+        passport.authenticate('jwt',{session:false}),
+        checkRoles(['admin']),
+        getAll);
+        doctorrouter.get("/:id",passport.authenticate('jwt',{session:false}),getDoctor );
+doctorrouter.post("/",
+        passport.authenticate('jwt',{session:false}),
+        checkRoles(['doctor']),
+        createDoctor);
 
-export default inventarioRouter;
+export default doctorrouter;
