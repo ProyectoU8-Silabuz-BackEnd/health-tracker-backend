@@ -63,13 +63,6 @@ export const create= async (req:Request, res: Response): Promise<void> =>{
             message,
             medicamento,
             pacientes} = req.body;
-        console.log(new Date(Fecha_inicio),
-            new Date(Fecha_fin),
-            interval,
-            message,
-            medicamento,
-            pacientes)
-        
         await prisma.recordatory.create({
             data:{
                 Fecha_inicio:new Date(Fecha_inicio),
