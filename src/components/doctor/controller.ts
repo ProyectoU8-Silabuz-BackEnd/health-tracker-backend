@@ -1,5 +1,6 @@
 import type { Request, Response} from "express";
 import { PrismaClient } from "@prisma/client";
+import { hash } from "bcrypt";
 
 const prisma= new PrismaClient();
 
@@ -53,6 +54,8 @@ export const createDoctor= async(req:Request, res: Response): Promise<void> =>{
         const {name,last_name,dni,celular,users} = req.body;
 
         console.log(name,last_name,dni,celular,users);
+
+        const hashP=await hash(users.password,10);
         const doctor=await prisma.doctor.create({
             data:{
                 name:name,
@@ -66,7 +69,7 @@ export const createDoctor= async(req:Request, res: Response): Promise<void> =>{
                         },
                         create:{
                             correo:users.correo,
-                            password:users.password,
+                            password:hashP,
                             rol:"doctor"
                         },
                     },

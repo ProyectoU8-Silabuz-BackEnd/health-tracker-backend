@@ -1,14 +1,17 @@
-import { User } from "./../../interfaces/userInterface";
+import { UserPayload } from "./../../interfaces/userInterface";
 import type { Request, Response,NextFunction} from "express";
 
 
-export function checkRoles(roles:string[]){
+export function checkRoles(roles:any){
     return (req:Request,res:Response,next:NextFunction)=>{
-        const user=req.user as User;
-        if (roles.includes(user.rol)){
+        const usuario=req.user as UserPayload;
+        if (roles.includes(usuario.user.rol)){
             next();
         } else{
-            next({ err: "No estas autorizado" });
+            res.status(200).json({
+                ok:false,
+                message:"No estas autorizado"
+            })
         }
 
     }

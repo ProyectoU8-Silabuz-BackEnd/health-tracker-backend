@@ -1,6 +1,6 @@
 import type { Request, Response} from "express";
 import { PrismaClient } from "@prisma/client";
-import {User} from "./../../interfaces/userInterface"
+import {hash} from "bcrypt"
 const prisma= new PrismaClient();
 
 export const allpacientes = async (_req: Request, res: Response): Promise<void> => {
@@ -53,6 +53,7 @@ export const addpaciente= async(req:Request, res: Response): Promise<void> =>{
         const {nombre,dni,edad,celular,users} = req.body;
         var role;
         console.log(users);
+        const hashP=await hash(users.password,10);
         const pacient=await prisma.pacients.create({
             data:{
                 nombre:nombre,
@@ -66,7 +67,7 @@ export const addpaciente= async(req:Request, res: Response): Promise<void> =>{
                         },
                         create:{
                             correo:users.correo,
-                            password:users.password,
+                            password:hashP,
                             rol:"pacient"
                         },
                     },
