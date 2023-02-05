@@ -13,7 +13,7 @@ const localStrategy=new Strategy({
             done(null,false);
             return;
         }
-       const equal=compare(password,user?.password as string);
+       const equal=compare(password,user.password);
        if(!equal){
         done(null,false);
         return;
