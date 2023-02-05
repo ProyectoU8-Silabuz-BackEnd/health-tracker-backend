@@ -29,6 +29,7 @@ model Pacients {
   celular String @unique
   pacient_id Int @unique
   users User @relation(fields: [pacient_id],references: [id])
+  recordatorios Recordatory[]
   @@map("pacientes")
 }
 
@@ -58,7 +59,8 @@ model User {
 
 model Recordatory{
   id Int @id @default(autoincrement())
-  paciente_id String
+  pacientes Pacients @relation(fields: [pacient_id],references: [id])
+  pacient_id Int
   Fecha_inicio DateTime
   Fecha_fin DateTime
   interval String
