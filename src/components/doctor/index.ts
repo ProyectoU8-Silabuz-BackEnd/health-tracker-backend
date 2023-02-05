@@ -9,10 +9,15 @@ doctorrouter.get("/",
         passport.authenticate('jwt',{session:false}),
         checkRoles(['admin']),
         getAll);
-        doctorrouter.get("/:id",passport.authenticate('jwt',{session:false}),getDoctor );
+
+
+doctorrouter.get("/:id",
+        passport.authenticate('jwt',{session:false}),
+        checkRoles(['admin','doctor']),
+        getDoctor );
+
 doctorrouter.post("/",
         passport.authenticate('jwt',{session:false}),
-        checkRoles(['doctor']),
         createDoctor);
 
 export default doctorrouter;
