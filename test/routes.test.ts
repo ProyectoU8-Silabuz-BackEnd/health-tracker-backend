@@ -38,5 +38,6 @@ describe("testeo para rutas",()=>{
         expect(res.status).toBe(201)
         expect(await res.data.message).toEqual("Paciente añadido correctamente")
     })
+
 });
 
