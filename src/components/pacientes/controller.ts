@@ -80,7 +80,6 @@ export const addpaciente= async(req:Request, res: Response): Promise<void> =>{
                 res.status(201).json({
                     ok:true, 
                     message: "Paciente añadido correctamente",
-                    pacient:pacient
                 });
 
             }
