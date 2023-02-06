@@ -82,7 +82,6 @@ export const createDoctor= async(req:Request, res: Response): Promise<void> =>{
         res.status(201).json({
             ok:true, 
             message: "Doctor añadido correctamente",
-            doctor: doctor
         });
 
         }catch (error) {

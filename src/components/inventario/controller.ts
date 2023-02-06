@@ -58,7 +58,6 @@ export const pastillaAdd = async (req: Request, res: Response): Promise<void> =>
 
         res.status(201).json({
             ok: true,
-            data: pastillaStock,
             message: "pastilla y su cantidad añadidas correctamente",
 		})
 

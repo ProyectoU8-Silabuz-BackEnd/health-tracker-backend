@@ -61,7 +61,6 @@ export const enfermedadAdd = async (req: Request, res: Response): Promise<void> 
     
         res.status(201).json({
             ok:true,
-            data:enfermedad,
             message: "enfermedad agregada"
         });
     } catch(error){

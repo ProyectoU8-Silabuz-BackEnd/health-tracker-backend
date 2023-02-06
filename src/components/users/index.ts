@@ -6,8 +6,7 @@ import { findAllUsers, findiduser,adduser } from "./controller";
 const userrouter: Router = Router();
 
 userrouter.get("/",
-        passport.authenticate('jwt',{session:false}),
-        checkRoles(['admin']), 
+        passport.authenticate('jwt',{session:false}), 
         findAllUsers);
 
 userrouter.get("/:id",
