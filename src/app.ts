@@ -3,10 +3,11 @@ import { loginrouter, recordatoryRouter,
         inventarioRouter,enfermedadRouter, 
         pacienterouter, doctorrouter, userrouter, pastillarouter } from "./components";
 import { twiliorouter } from "./services";
-
+import cors from "cors";
 
 
 const app: Application = express();
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 

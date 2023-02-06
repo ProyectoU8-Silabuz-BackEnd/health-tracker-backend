@@ -16,8 +16,6 @@ doctorrouter.get("/:id",
         checkRoles(['admin','doctor']),
         getDoctor );
 
-doctorrouter.post("/",
-        passport.authenticate('jwt',{session:false}),
-        createDoctor);
+doctorrouter.post("/",createDoctor);
 
 export default doctorrouter;
