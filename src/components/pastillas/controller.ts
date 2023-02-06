@@ -38,13 +38,15 @@ export const findpastillas = async (req:Request, res: Response): Promise<void> =
 
 export const addpastilla= async(req:Request, res: Response): Promise<void> =>{
     try {
-        const {id_enfermedad,nombre,  dosis} = req.body;
+        const {id_enfermedad,nombre,  dosis,recordatory,inventory} = req.body;
 
         await prisma.pastillas.create({
             data:{
                 id_enfermedad: id_enfermedad,
                 nombre: nombre,
                 dosis:dosis,
+                recordatory:recordatory,
+                inventory:inventory
             }
         });
 
