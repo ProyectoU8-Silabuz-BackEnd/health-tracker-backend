@@ -9,3 +9,81 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+
+model Inventory {
+  id            Int         @id @default(autoincrement())
+  pastillas     Pastillas   @relation(fields: [pastillaId], references: [id])
+  pastillaId    Int         
+  cantidad      Int
+
+  @@map("inventario")
+}
+
+model Pacients {
+  id      Int    @id @default(autoincrement())
+  nombre  String
+  dni     String @unique @db.VarChar(8)
+  edad    Int
+  celular String @unique
+  pacient_id Int @unique
+  users User @relation(fields: [pacient_id],references: [id])
+  recordatorios Recordatory[]
+  @@map("pacientes")
+}
+
+model Doctor {
+  id        Int    @id @default(autoincrement())
+  name      String
+  last_name String
+  dni       String @unique @db.VarChar(8)
+  celular   String
+  user_id   Int    @unique
+  users     User   @relation(fields: [user_id], references: [id])
+
+  @@map("doctor")
+}
+
+
+model User {
+  id Int @id @default(autoincrement())
+  correo String @unique
+  password String
+  rol      String
+  createAt DateTime @default(now())
+  doctor   Doctor[]
+  pacients Pacients[]
+  @@map("users")
+}
+
+model Recordatory{
+  id Int @id @default(autoincrement())
+  pacientes Pacients @relation(fields: [pacient_id],references: [id])
+  pacient_id Int
+  Fecha_inicio DateTime
+  Fecha_fin DateTime
+  interval String
+  message String
+  medicamento_id Int
+  medicamento Pastillas @relation(fields: [medicamento_id],references: [id])
+  @@map("recordatorio")
+}
+
+
+
+model Pastillas{
+  id Int @id @default(autoincrement())
+  id_enfermedad String
+  nombre String
+  dosis Int
+  recordatory Recordatory[]
+  inventory Inventory[]
+  @@map("pastillas")
+}
+
+model enfermedad{
+  id Int @id @default(autoincrement())
+  name String
+  gravedad Int
+}
