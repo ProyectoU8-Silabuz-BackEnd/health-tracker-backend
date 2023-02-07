@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { checkRoles } from "./../../middleware/handler/roleHandler";
-import { allpacientes, findpaciente,addpaciente, findbyNumber } from "./controller";
+import { allpacientes, findpaciente,addpaciente } from "./controller";
 
 const pacienterouter: Router = Router();
 
