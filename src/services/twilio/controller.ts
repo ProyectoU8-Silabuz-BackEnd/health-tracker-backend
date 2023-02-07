@@ -8,7 +8,7 @@ const service = process.env.TWILIO_MESSAGING_SERVICE_SID;
 
 
 const client = twilio(accountSid, authToken);
-console.log(client)
+
 export function sendSMS(number:string,Fecha_send:Date,message:string){
 
     try {    
