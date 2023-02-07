@@ -2,7 +2,6 @@ import express, { type Application } from "express";
 import { loginrouter, recordatoryRouter,
         inventarioRouter,enfermedadRouter, 
         pacienterouter, doctorrouter, userrouter, pastillarouter } from "./components";
-import { twiliorouter } from "./services";
 import swaggerUi from "swagger-ui-express";
 import swaggerSetup from "./docs/swagger"
 import cors from "cors";
@@ -23,6 +22,5 @@ app.use("/api/v1/pacientes", pacienterouter);
 app.use("/api/v1/doctor",doctorrouter);
 app.use("/api/v1/users",userrouter);
 app.use("/api/v1/user/login", loginrouter);
-app.use("/api/v1/twilio",twiliorouter);
 app.use("/api/v1/pastilla",pastillarouter)
 export default app;

@@ -1,6 +1,5 @@
 import type { Request, Response} from "express";
 import { PrismaClient } from "@prisma/client";
-import { Connect } from "twilio/lib/twiml/VoiceResponse";
 import { getDateArray } from "../../services/twilio/funciones";
 import { sendSMS } from "../../services/twilio/controller";
 
