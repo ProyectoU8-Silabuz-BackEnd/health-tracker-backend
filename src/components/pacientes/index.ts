@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { checkRoles } from "./../../middleware/handler/roleHandler";
-import { allpacientes, findpaciente,addpaciente } from "./controller";
+import { allpacientes, findpaciente,addpaciente, findbyNumber } from "./controller";
 
 const pacienterouter: Router = Router();
 
@@ -25,7 +25,6 @@ const pacienterouter: Router = Router();
 
 pacienterouter.get("/",
         passport.authenticate('jwt',{session:false}), 
-        checkRoles(['admin']),
         allpacientes);
 
 
@@ -59,6 +58,36 @@ pacienterouter.get("/:id",
         checkRoles(['pacient','admin']),
         findpaciente);
 
+
+/** 
+ * Get
+ * @openapi
+ * /api/v1/paciente/{celular}:
+ *    get:
+ *      tags:
+ *        - paciente
+ *      summary: Listar todos paciente
+ *      description: Este endpoint nos permite extraer la informacion de un paciente en especifico mediante el celular
+ *      operationId: getpaciente
+ *      parameters:
+ *        - name: celular
+ *          in: path
+ *          description: ID del paciente a retornar
+ *          schema:
+ *            type: integer
+ *            format: int64
+ *      response:
+ *        '200':
+ *          description: Retorna una lista de objetos
+ *        '500':
+ *          description: Retorna un error si alguno de los campos especificados como unicos se repite al registrar a un usuario
+ *      security:
+ *       - bearerAuth:
+*/
+pacienterouter.get("/s/:celular",
+        passport.authenticate('jwt',{session:false}),
+        checkRoles(['doctor','pacient','admin']),
+        findbyNumber);        
 
 
 /** 
