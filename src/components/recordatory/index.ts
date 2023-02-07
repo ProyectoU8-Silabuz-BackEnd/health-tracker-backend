@@ -23,7 +23,7 @@ const recordatoryRouter: Router = Router();
 */
 recordatoryRouter.get("/",
     passport.authenticate('jwt',{session:false}),
-    checkRoles(['admin']),
+    checkRoles(['admin','pacient','doctor']),
     findAll);
 
 /** 
