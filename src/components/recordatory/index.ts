@@ -53,7 +53,7 @@ recordatoryRouter.get("/",
 */
 recordatoryRouter.get("/:id",
     passport.authenticate('jwt',{session:false}),
-    checkRoles(['paciente','doctor','admin']),
+    checkRoles(['pacient','doctor','admin']),
     findRecordatory)
 
 
@@ -82,7 +82,7 @@ recordatoryRouter.get("/:id",
 */
 recordatoryRouter.post("/",
     passport.authenticate('jwt',{session:false}),
-    checkRoles(['paciente','doctor','admin']),
+    checkRoles(['pacient','doctor','admin']),
     create);
 
 export default recordatoryRouter;
