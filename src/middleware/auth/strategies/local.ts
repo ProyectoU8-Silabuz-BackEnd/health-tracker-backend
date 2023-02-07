@@ -14,7 +14,8 @@ const localStrategy=new Strategy({
             return;
         }
        const equal=compare(password,user.password);
-       if(!equal){
+       const rpta=await equal;
+       if(rpta===false){
         done(null,false);
         return;
        }
